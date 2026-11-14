@@ -1,0 +1,155 @@
+{
+  "name": "agent-voice-bridge",
+  "displayName": "Agent Voice Bridge",
+  "description": "Universal VS Code / Antigravity / Cursor / Windsurf voice-to-agent extension. Speak to your AI coding agent via microphone with Gemini 2.5 Flash, OpenRouter, or Whisper.",
+  "version": "0.1.0",
+  "publisher": "local",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "voice",
+    "speech",
+    "microphone",
+    "ai",
+    "agent",
+    "gemini",
+    "antigravity",
+    "chat"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "agentVoice.toggleRecording",
+        "title": "Agent Voice: Toggle Recording (Talk to Agent)"
+      },
+      {
+        "command": "agentVoice.openPanel",
+        "title": "Agent Voice: Open Voice Controller Panel"
+      },
+      {
+        "command": "agentVoice.pasteLastTranscript",
+        "title": "Agent Voice: Re-inject Last Transcript into Chat"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "agentVoice.toggleRecording",
+        "key": "alt+space",
+        "mac": "alt+space"
+      },
+      {
+        "command": "agentVoice.toggleRecording",
+        "key": "ctrl+shift+v",
+        "mac": "cmd+shift+v",
+        "when": "editorLangId != markdown"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "agent-voice-container",
+          "title": "Agent Voice",
+          "icon": "$(mic)"
+        }
+      ]
+    },
+    "views": {
+      "agent-voice-container": [
+        {
+          "type": "webview",
+          "id": "agentVoice.recorderView",
+          "name": "Voice Controller"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Agent Voice Bridge",
+      "properties": {
+        "agentVoice.provider": {
+          "type": "string",
+          "enum": [
+            "gemini",
+            "openrouter",
+            "openai",
+            "browser"
+          ],
+          "default": "gemini",
+          "description": "Transcription provider: 'gemini' (Gemini 2.5 Flash), 'openrouter' (OpenRouter audio model), 'openai' (Whisper API), or 'browser' (Web Speech API)."
+        },
+        "agentVoice.captureMode": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "native",
+            "webview"
+          ],
+          "default": "auto",
+          "description": "Microphone capture backend: 'auto' uses native Windows MCI recorder on Windows (avoids IDE webview permission blocks) and webview elsewhere."
+        },
+        "agentVoice.geminiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Gemini API key. If empty, auto-reads GEMINI_API_KEY from environment, workspace .env, or e:\\apache\\.env."
+        },
+        "agentVoice.openrouterApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenRouter API key (used when provider is 'openrouter'). If empty, auto-reads OPENROUTER_API_KEY from environment or .env."
+        },
+        "agentVoice.openrouterModel": {
+          "type": "string",
+          "default": "google/gemini-2.5-flash",
+          "description": "OpenRouter model ID supporting audio input (used when provider is 'openrouter')."
+        },
+        "agentVoice.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API key (used only when provider is set to 'openai'). If empty, auto-reads OPENAI_API_KEY from environment or .env."
+        },
+        "agentVoice.autoSubmit": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically submit the chat prompt after injecting the transcribed text."
+        },
+        "agentVoice.cleanTranscript": {
+          "type": "boolean",
+          "default": true,
+          "description": "Instruct Gemini to remove filler words (um, uh) and false starts while keeping technical terms exact."
+        },
+        "agentVoice.customVocabulary": {
+          "type": "string",
+          "default": "XAUUSDm, US30m, USOILm, BTCUSDm, MQL5, ATR, scalper, walk-forward, Antigravity",
+          "description": "Comma-separated domain terms to help Gemini transcribe specialized vocabulary accurately."
+        },
+        "agentVoice.preserveClipboard": {
+          "type": "boolean",
+          "default": false,
+          "description": "Restore previous clipboard contents shortly after pasting into Agent Chat."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --sourcemap",
+    "watch": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --sourcemap --watch",
+    "typecheck": "tsc --noEmit",
+    "package": "npm run compile && vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.2.2",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.7.2"
+  }
+}

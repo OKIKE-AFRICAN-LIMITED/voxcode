@@ -1,0 +1,195 @@
+<section id="plans" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Licensing &amp; Scale</div>
+      <h2>Start free. Scale to enterprise.</h2>
+      <p>Zero server cost on day one with BYOK or local models—upgrade to managed cloud voice when teams are ready.</p>
+    </div>
+
+    <div class="plans">
+      <div class="plan">
+        <div class="plan-top">
+          <h3>Community</h3>
+          <span class="price">$0</span>
+        </div>
+        <p class="plan-sub">BYOK &amp; Local Whisper for individual developers.</p>
+        <ul>
+          <li>Bring your own Gemini, OpenRouter, or OpenAI key</li>
+          <li>Native Windows 16 kHz capture + multi-IDE injection</li>
+          <li>Custom vocabulary &amp; filler-word cleanup</li>
+        </ul>
+      </div>
+
+      <div class="plan plan-featured">
+        <div class="plan-top">
+          <h3>Pro Cloud</h3>
+          <span class="price">Managed</span>
+        </div>
+        <p class="plan-sub">One-click sign-in with zero API keys to manage.</p>
+        <ul>
+          <li>Hosted proxy routing to Gemini 2.5 Flash / Whisper</li>
+          <li>Per-user quotas and priority latency</li>
+          <li>Early access to Phase 2 two-way TTS replies</li>
+        </ul>
+      </div>
+
+      <div class="plan">
+        <div class="plan-top">
+          <h3>Enterprise</h3>
+          <span class="price">Custom</span>
+        </div>
+        <p class="plan-sub">Private VPC deployment &amp; governance controls.</p>
+        <ul>
+          <li>Self-hosted proxy or private model endpoints</li>
+          <li>SSO seat management &amp; zero audio retention</li>
+          <li>Internal registry rollout &amp; dedicated SLA</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="install" class="section install-sec">
+  <div class="wrap">
+    <div class="install-box">
+      <div>
+        <div class="eyebrow">Ready to Ship</div>
+        <h2>Install VoxCode in 30 seconds</h2>
+        <p>Package: <code>agent-voice-bridge-0.1.0.vsix</code> (26.3 KB)</p>
+      </div>
+      <div class="install-right">
+        <div class="cli-box">
+          <code id="cliCmd">code --install-extension agent-voice-bridge-0.1.0.vsix</code>
+          <button id="copyCliBtn" type="button">Copy</button>
+        </div>
+        <span class="ui-hint">Or in IDE: Extensions (<code>Ctrl+Shift+X</code>) → <code>...</code> → Install from VSIX...</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const copyBtn = document.getElementById('copyCliBtn');
+  const cliCmd = document.getElementById('cliCmd');
+  copyBtn?.addEventListener('click', async () => {
+    const text = cliCmd?.textContent || '';
+    try {
+      await navigator.clipboard.writeText(text);
+      copyBtn.textContent = 'Copied';
+      setTimeout(() => {
+        copyBtn.textContent = 'Copy';
+      }, 1500);
+    } catch {
+      copyBtn.textContent = 'Copy';
+    }
+  });
+</script>
+
+<style>
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .plan {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+  }
+  .plan-featured {
+    border-color: rgba(34, 211, 238, 0.45);
+    background: linear-gradient(180deg, rgba(34, 211, 238, 0.06), rgba(14, 17, 27, 0.8));
+    box-shadow: 0 0 48px rgba(34, 211, 238, 0.08);
+  }
+  .plan-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .plan-top h3 {
+    font-size: 19px;
+    font-weight: 600;
+  }
+  .price {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cyan);
+  }
+  .plan-sub {
+    margin: 0 0 18px;
+    color: var(--muted);
+    font-size: 13.5px;
+  }
+  .plan ul {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 13.5px;
+  }
+  .plan li {
+    margin-bottom: 8px;
+  }
+  .install-sec {
+    padding-top: 24px;
+  }
+  .install-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border-radius: 20px;
+    padding: 36px;
+    background: linear-gradient(135deg, rgba(16, 20, 32, 0.92), rgba(9, 11, 18, 0.95));
+    border: 1px solid var(--border-bright);
+  }
+  .install-box h2 {
+    font-size: 26px;
+    margin-bottom: 6px;
+  }
+  .install-box p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .install-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cli-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(3, 4, 7, 0.8);
+    border: 1px solid var(--border-bright);
+  }
+  .cli-box code {
+    border: none;
+    background: transparent;
+  }
+  .cli-box button {
+    background: #ffffff;
+    color: #030407;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .ui-hint {
+    font-size: 12.5px;
+    color: var(--subtle);
+  }
+  @media (max-width: 900px) {
+    .plans {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

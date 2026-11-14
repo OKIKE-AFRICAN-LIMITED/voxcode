@@ -1,0 +1,192 @@
+<section id="architecture" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Architecture</div>
+      <h2>Built for real engineering teams.</h2>
+      <p>Every layer is designed to eliminate Electron mic blocks, preserve technical jargon, and scale from solo devs to enterprise rollouts.</p>
+    </div>
+
+    <div class="bento">
+      <!-- Wide card: Signal Flow -->
+      <div class="bento-card span-2">
+        <div class="bento-meta">01 · NATIVE CAPTURE PIPELINE</div>
+        <h3>Zero-permission Windows audio capture</h3>
+        <p>Bypasses VS Code Webview <code>Permission denied</code> errors by recording 16 kHz mono WAV natively through Windows <code>winmm.dll</code>—with zero external binaries.</p>
+        <div class="flow-diagram">
+          <div class="node"><span>Alt+Space</span><strong>Mic 16 kHz</strong></div>
+          <div class="wire"></div>
+          <div class="node accent"><span>AI Engine</span><strong>Gemini / Whisper</strong></div>
+          <div class="wire"></div>
+          <div class="node"><span>Auto-Focus</span><strong>Agent Chat</strong></div>
+        </div>
+      </div>
+
+      <!-- IDE Tiles -->
+      <div class="bento-card">
+        <div class="bento-meta">02 · UNIVERSAL BRIDGE</div>
+        <h3>One .vsix, four IDEs</h3>
+        <p>Detects the active host command automatically.</p>
+        <div class="ide-grid">
+          <div class="ide-tile">Antigravity</div>
+          <div class="ide-tile">VS Code</div>
+          <div class="ide-tile">Cursor</div>
+          <div class="ide-tile">Windsurf</div>
+        </div>
+      </div>
+
+      <!-- Vocabulary -->
+      <div class="bento-card">
+        <div class="bento-meta">03 · DOMAIN PRECISION</div>
+        <h3>Custom technical vocabulary</h3>
+        <p>Feed project symbols, tickers, and frameworks so AI never mangles terms like <code>XAUUSDm</code>, <code>MQL5</code>, or <code>walk-forward</code>.</p>
+        <div class="token-cloud">
+          <span>XAUUSDm</span><span>MQL5</span><span>ATR</span><span>OpenRouter</span><span>VPC</span>
+        </div>
+      </div>
+
+      <!-- Zero Secrets & Phase 2 -->
+      <div class="bento-card span-2">
+        <div class="bento-meta">04 · ENTERPRISE SECURITY &amp; ROADMAP</div>
+        <h3>Zero embedded secrets. Ready for Phase 2 two-way voice.</h3>
+        <p>No API keys are ever packaged inside the <code>.vsix</code>. Resolve keys via Settings, environment variables, private VPC proxies, or upcoming local on-device Whisper—with Phase 2 adding VAD auto-send and concise TTS agent replies.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.bento-card').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const ev = e as MouseEvent;
+      const rect = (card as HTMLElement).getBoundingClientRect();
+      (card as HTMLElement).style.setProperty('--mx', `${ev.clientX - rect.left}px`);
+      (card as HTMLElement).style.setProperty('--my', `${ev.clientY - rect.top}px`);
+    });
+  });
+</script>
+
+<style>
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .bento-card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .bento-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), rgba(34, 211, 238, 0.1), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+  }
+  .bento-card:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  .bento-card:hover::before {
+    opacity: 1;
+  }
+  .span-2 {
+    grid-column: span 2;
+  }
+  .bento-meta {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--cyan);
+    margin-bottom: 12px;
+  }
+  .bento-card h3 {
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .bento-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .node {
+    flex: 1;
+    min-width: 120px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+  }
+  .node.accent {
+    border-color: rgba(34, 211, 238, 0.35);
+    background: rgba(34, 211, 238, 0.06);
+  }
+  .node span {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    color: var(--subtle);
+  }
+  .node strong {
+    font-size: 13.5px;
+    color: var(--text);
+  }
+  .wire {
+    width: 28px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), var(--cyan), rgba(255, 255, 255, 0.1));
+  }
+  .ide-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .ide-tile {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+  }
+  .token-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .token-cloud span {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11.5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(129, 140, 248, 0.1);
+    border: 1px solid rgba(129, 140, 248, 0.28);
+    color: #c7d2fe;
+  }
+  @media (max-width: 860px) {
+    .bento {
+      grid-template-columns: 1fr;
+    }
+    .span-2 {
+      grid-column: span 1;
+    }
+    .wire {
+      display: none;
+    }
+  }
+</style>

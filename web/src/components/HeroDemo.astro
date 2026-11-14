@@ -1,0 +1,531 @@
+---
+import ParticleMic from './ParticleMic.astro';
+---
+
+<section class="hero" id="demo">
+  <div class="hero-wave-bg" aria-hidden="true"></div>
+
+  <div class="wrap hero-grid">
+    <!-- Left Copy -->
+    <div class="hero-copy">
+      <div class="version-pill">
+        <span class="green-dot"></span>
+        <span>For Antigravity, VS Code &amp; Cursor</span>
+        <span class="ver">v0.1.0</span>
+      </div>
+
+      <h1>
+        Talk to Your<br />
+        AI Agent.<br />
+        <span class="grad-title">Code Faster.</span>
+      </h1>
+
+      <p class="lead">
+        VoxCode is a voice-first IDE extension that lets you communicate with your AI coding agents using natural speech — no typing, no interruptions.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#install" class="btn-purple">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.6 3.2 9.4 10.6 4.7 7l-1.9 1.1v7.8l1.9 1.1 4.7-3.6 8.2 7.4L21 19V5l-3.4-1.8ZM17.5 16.4 12.2 12l5.3-4.4v8.8Z"/>
+          </svg>
+          <span>Install Extension ↗</span>
+        </a>
+        <button id="watchDemoBtn" class="btn-dark" type="button">
+          <span class="play-icon">▶</span>
+          <span id="watchDemoLabel">Watch Demo</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Right: Responsive Interactive Particle Microphone -->
+    <div class="hero-visual">
+      <ParticleMic />
+    </div>
+  </div>
+
+  <!-- 4 Feature Cards directly below Hero (matching reference layout) -->
+  <div class="wrap feature-strip" id="features">
+    <div class="f-card">
+      <div class="f-icon purple">🎙</div>
+      <h3>Voice-Powered Control</h3>
+      <p>Speak naturally. Native 16 kHz Windows capture gets things done faster.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon blue">⚡</div>
+      <h3>Seamless Integration</h3>
+      <p>Works with Antigravity, VS Code, Cursor, Windsurf, and OpenRouter.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon green">ılı</div>
+      <h3>Real-Time Feedback</h3>
+      <p>Watch your agent listen, transcribe with custom vocabulary, and inject.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon amber">🚀</div>
+      <h3>Boost Productivity</h3>
+      <p>Focus on architecture and logic — VoxCode handles the prompt typing.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const watchDemoBtn = document.getElementById('watchDemoBtn');
+  const watchDemoLabel = document.getElementById('watchDemoLabel');
+
+  watchDemoBtn?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('voxcode:pulse'));
+    if (watchDemoLabel) {
+      watchDemoLabel.textContent = 'Pulsing Voice...';
+      setTimeout(() => {
+        watchDemoLabel.textContent = 'Watch Demo';
+      }, 2200);
+    }
+  });
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 54px 0 40px;
+    overflow: hidden;
+  }
+  .hero-wave-bg {
+    position: absolute;
+    inset: 40px 0 auto 0;
+    height: 480px;
+    background:
+      radial-gradient(ellipse 55% 60% at 72% 45%, rgba(139, 92, 246, 0.28), transparent 70%),
+      radial-gradient(ellipse 40% 50% at 58% 60%, rgba(56, 189, 248, 0.16), transparent 70%);
+    filter: blur(36px);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 44px;
+    align-items: center;
+  }
+  .hero-copy,
+  .hero-visual {
+    min-width: 0;
+  }
+  .version-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .green-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+  }
+  .ver {
+    color: #c4b5fd;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+  }
+  h1 {
+    font-size: clamp(38px, 4.6vw, 58px);
+    line-height: 1.05;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .grad-title {
+    background: linear-gradient(90deg, #c084fc 0%, #818cf8 55%, #60a5fa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lead {
+    color: var(--muted);
+    font-size: 16px;
+    margin: 0 0 28px;
+    max-width: 470px;
+  }
+  .hero-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn-purple {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #7c3aed, #6366f1);
+    box-shadow: 0 0 28px rgba(124, 58, 237, 0.45);
+  }
+  .btn-dark {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .play-icon {
+    font-size: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 3D Tilted IDE Window */
+  .ide-perspective {
+    perspective: 1300px;
+  }
+  .ide-window {
+    transform: rotateY(-7deg) rotateX(2deg);
+    border-radius: 16px;
+    background: rgba(11, 9, 24, 0.94);
+    border: 1px solid rgba(167, 139, 250, 0.28);
+    box-shadow:
+      -20px 28px 70px rgba(0, 0, 0, 0.75),
+      0 0 48px rgba(124, 58, 237, 0.22);
+    overflow: hidden;
+  }
+  .ide-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .mac-dots {
+    display: flex;
+    gap: 5px;
+  }
+  .mac-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+  }
+  .ide-split {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    min-height: 360px;
+  }
+  .code-pane {
+    display: flex;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(6, 5, 14, 0.85);
+  }
+  .activity-rail {
+    width: 38px;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0;
+    gap: 14px;
+    font-size: 13px;
+    color: var(--subtle);
+  }
+  .rail-icon.active {
+    color: #c4b5fd;
+    background: rgba(124, 58, 237, 0.22);
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .code-view {
+    margin: 0;
+    padding: 18px 14px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: #cbd5e1;
+    overflow: hidden;
+  }
+  .c-num { color: #475569; margin-right: 8px; }
+  .c-kw { color: #c084fc; }
+  .c-fn { color: #60a5fa; }
+  .c-str { color: #34d399; }
+
+  /* Right Voice Agent Pane */
+  .agent-pane {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    background: radial-gradient(circle at 50% 35%, rgba(124, 58, 237, 0.16), transparent 65%);
+  }
+  .agent-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+  }
+  .agent-brand {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 600;
+  }
+  .mini-bars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .mini-bars i {
+    display: block;
+    width: 2px;
+    background: #a855f7;
+    border-radius: 99px;
+  }
+  .mini-bars i:nth-child(1) { height: 6px; }
+  .mini-bars i:nth-child(2) { height: 12px; }
+  .mini-bars i:nth-child(3) { height: 9px; }
+  .mini-bars i:nth-child(4) { height: 5px; }
+  .conn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10.5px;
+    color: #94a3b8;
+  }
+  .c-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+  .agent-pills {
+    display: flex;
+    gap: 4px;
+    padding: 3px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .ap {
+    flex: 1;
+    text-align: center;
+    font-size: 10px;
+    padding: 3px 6px;
+    border-radius: 999px;
+    color: var(--muted);
+  }
+  .ap.active {
+    background: rgba(124, 58, 237, 0.28);
+    color: #ffffff;
+  }
+  .orb-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 6px 0 0;
+  }
+  .wave-bars {
+    display: flex;
+    align-items: center;
+    gap: 2.5px;
+    height: 26px;
+  }
+  .wave-bars i {
+    display: block;
+    width: 2.5px;
+    border-radius: 99px;
+    background: #818cf8;
+    opacity: 0.6;
+  }
+  .wave-bars i:nth-child(1) { height: 7px; }
+  .wave-bars i:nth-child(2) { height: 15px; }
+  .wave-bars i:nth-child(3) { height: 22px; }
+  .wave-bars i:nth-child(4) { height: 13px; }
+  .wave-bars i:nth-child(5) { height: 8px; }
+  .wave-bars.active i {
+    opacity: 1;
+    background: #38bdf8;
+    animation: wv 0.5s infinite ease-in-out alternate;
+  }
+  @keyframes wv {
+    from { transform: scaleY(0.5); }
+    to { transform: scaleY(1.2); }
+  }
+  .orb-btn {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 2px solid rgba(167, 139, 250, 0.8);
+    background: radial-gradient(circle at 35% 25%, #8b5cf6, #4c1d95);
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 26px rgba(139, 92, 246, 0.6), 0 0 42px rgba(56, 189, 248, 0.25);
+  }
+  .orb-btn.recording {
+    border-color: #fb7185;
+    background: radial-gradient(circle at 35% 25%, #f43f5e, #881337);
+  }
+  .orb-sub {
+    text-align: center;
+  }
+  .orb-sub strong {
+    display: block;
+    font-size: 12.5px;
+  }
+  .orb-sub span {
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .agent-status {
+    padding: 8px 10px;
+    border-radius: 9px;
+    background: rgba(109, 40, 217, 0.22);
+    border: 1px solid rgba(167, 139, 250, 0.28);
+  }
+  .as-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #c4b5fd;
+  }
+  .as-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #a855f7;
+  }
+  .as-dot.rec { background: #f43f5e; }
+  .as-dot.proc { background: #38bdf8; }
+  .as-sub {
+    font-size: 10.5px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .recent-box {
+    font-size: 10.5px;
+  }
+  .rb-head {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+  .rb-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .rb-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+  .rb-text {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .rb-time {
+    color: var(--subtle);
+    font-size: 9.5px;
+  }
+
+  /* 4 Feature Cards below hero */
+  .feature-strip {
+    position: relative;
+    z-index: 2;
+    margin-top: 52px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .f-card {
+    background: var(--card);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .f-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  .f-icon.purple { background: rgba(168, 85, 247, 0.16); color: #c084fc; }
+  .f-icon.blue { background: rgba(56, 189, 248, 0.16); color: #38bdf8; }
+  .f-icon.green { background: rgba(34, 197, 94, 0.16); color: #4ade80; }
+  .f-icon.amber { background: rgba(245, 158, 11, 0.16); color: #fbbf24; }
+  .f-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .f-card p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 960px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+    .ide-window {
+      transform: none;
+    }
+    .feature-strip {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .ide-split,
+    .feature-strip {
+      grid-template-columns: 1fr;
+    }
+    .code-pane {
+      display: none;
+    }
+  }
+</style>

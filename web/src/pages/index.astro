@@ -1,0 +1,75 @@
+---
+import EnterpriseFeatures from '../components/EnterpriseFeatures.astro';
+import HeroDemo from '../components/HeroDemo.astro';
+import Navbar from '../components/Navbar.astro';
+import PlansAndInstall from '../components/PlansAndInstall.astro';
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VoxCode — Enterprise Voice Interface for AI Coding Agents | Powered by KIKE</title>
+    <meta name="description" content="VoxCode by KIKE: Voice-to-agent extension for Antigravity IDE, VS Code, Cursor, and Windsurf." />
+    <link rel="icon" type="image/jpeg" href="/voxcode-logo.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <Navbar />
+    <main>
+      <HeroDemo />
+      <EnterpriseFeatures />
+      <PlansAndInstall />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div class="footer-brand">
+          <span>VoxCode</span>
+          <span>·</span>
+          <span class="powered">Powered by</span>
+          <img src="/kike-logo.png" alt="KIKE" class="footer-logo" />
+        </div>
+        <div class="footer-meta">Universal IDE Voice Extension · MIT License</div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: rgba(5, 6, 10, 0.9);
+    padding: 28px 0;
+    font-size: 13px;
+    color: var(--subtle);
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .powered {
+    color: var(--subtle);
+    font-weight: 400;
+  }
+  .footer-logo {
+    height: 22px;
+    width: auto;
+    display: block;
+    filter: invert(1);
+    opacity: 0.95;
+  }
+</style>

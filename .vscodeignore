@@ -1,0 +1,9 @@
+.vscode/**
+src/**
+web/**
+node_modules/**
+tsconfig.json
+*.ts
+*.map
+VOICE_EXTENSION_SPEC.md
+.gitignore
